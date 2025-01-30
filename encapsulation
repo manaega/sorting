@@ -1,0 +1,94 @@
+class Product {
+    private String name;
+    private double price;
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+
+class Customer {
+    private int customerId;
+    private String name;
+
+    public Customer(int customerId, String name) {
+        this.customerId = customerId;
+        this.name = name;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Order {
+    private Customer customer;
+    private List<OrderItem> items;
+
+    public Order(Customer customer) {
+        this.customer = customer;
+        this.items = new ArrayList<>();
+    }
+
+    public void addProduct(Product product, int quantity) {
+        this.items.add(new OrderItem(product, quantity));
+    }
+
+    public void displayOrderDetails() {
+        System.out.println("Order Details for Customer: " + customer.getName());
+        for (OrderItem item : items) {
+            System.out.println("Product: " + item.getProduct().getName() + ", Quantity: " + item.getQuantity() +
+                               ", Price: " + item.getProduct().getPrice());
+        }
+    }
+}
+
+class OrderItem {
+    private Product product;
+    private int quantity;
+
+    public OrderItem(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+}
+
+public class OrderingSystem {
+    public static void main(String[] args) {
+        Product product1 = new Product("Laptop", 1200.00);
+        Product product2 = new Product("Smartphone", 800.00);
+
+        Customer customer = new Customer(1, "John Doe");
+
+        Order order = new Order(customer);
+
+        order.addProduct(product1, 1);
+        order.addProduct(product2, 2);
+
+        order.displayOrderDetails();
+    }
+}
